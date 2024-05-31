@@ -1,6 +1,23 @@
 import React from 'react'
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 export default function Emp() {
+
+
+  const validationSchema1 = Yup.object().shape({
+    firstName:Yup.string().required("Please Enter firstName").min(2,"Please enter valid string").max(10,"please enter valid string"),
+    email: Yup.string().email("Please enter valid email"),
+    password: Yup.string()
+    .required('Password is required')
+    .min(6, 'Password must be at least 6 characters')
+    .max(40, 'Password must not exceed 40 characters'),
+  confirmPassword: Yup.string()
+    .required('Confirm Password is required')
+    .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
+    accept: Yup.bool().oneOf([true], 'Accept Terms is required'),
+
+  })
+
   return (
     <div>
     <h1>Sign Up</h1>
@@ -12,8 +29,12 @@ export default function Emp() {
         city:'',
         educationlevel:'',
         accept:false,
-        hob:[]
+        hob:[],
+        password: "",
+        confirmPassword:""
+
       }}
+      validationSchema={validationSchema1}
       onSubmit={(a) => {
        
         console.log(a);
@@ -25,7 +46,7 @@ export default function Emp() {
         <label htmlFor="firstName">First Name</label>
         <Field id="firstName" name="firstName" placeholder="Jane" />
 
-
+      <ErrorMessage name='firstName' component="div"/>
         <label htmlFor="lastName">Last Name</label>
         <Field id="lastName" name="lastName" placeholder="Doe" />
 
@@ -76,6 +97,15 @@ export default function Emp() {
             </label>
           </div>
 
+          <label htmlFor="password">Password</label>
+        <Field type="password" id="password" name="password" placeholder="Jane" />
+
+      <ErrorMessage name='password' component="div"/>
+
+      <label htmlFor="confirmPassword">Confirm Password</label>
+        <Field type="password" id="confirmPassword" name="confirmPassword" placeholder="Jane" />
+
+      <ErrorMessage name='confirmPassword' component="div"/>
 
         <button type="submit">Submit</button>
       </Form>
