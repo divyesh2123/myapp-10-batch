@@ -45,7 +45,7 @@ export default function FullFormFunction() {
 
 
   var  validateNumber = evt => {
-        var theEvent = evt || window.event;
+        var theEvent = evt ;
     
         // Handle paste
       
@@ -103,7 +103,7 @@ export default function FullFormFunction() {
         let formErrorsObj = {};
         if (name === "password" || name === "confirmPassword") {
           let refValue = formObj[
-            name === "pa7ssword" ? "confirmPassword" : "password"
+            name === "password" ? "confirmPassword" : "password"
           ];
           const errorMsg = validateField(name, value, refValue);
           formErrorsObj = { ...formErrors, [name]: errorMsg };
@@ -184,7 +184,7 @@ export default function FullFormFunction() {
         const { form, formErrors } = state;
         const errorObj = validateForm(form, formErrors);
         if (Object.keys(errorObj).length !== 0) {
-          setState({...state, formErrors: { ...formErrors, ...errorObj } });
+          setState({...state, formErrors: errorObj });
           return false;
         }
         console.log("Data: ", form);

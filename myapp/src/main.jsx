@@ -9,9 +9,13 @@ import Registration from './Registration.jsx'
 import Emp from './Emp.jsx'
 import Profile from './Profile.jsx'
 import FullFormFunction from './FullFormFunction.jsx'
+import DisplayInfo from './DisplayInfo.jsx'
+import Employee from './Employee.jsx'
+import MyGrid from './MyGrid.jsx'
+import Parent from './Parent.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <FullFormFunction />
+    <Parent />
   </React.StrictMode>,
 )
