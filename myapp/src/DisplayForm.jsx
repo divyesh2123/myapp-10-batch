@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 
-export default function DisplayForm({data,removeRecord}) {
+export default function DisplayForm({data,removeRecord,editInfo}) {
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -27,9 +27,13 @@ export default function DisplayForm({data,removeRecord}) {
         console.log(params);
        return( <>
 
-<Button variant="outlined" >
+<Button variant="outlined" onClick={()=>{
+
+editInfo(params.row.id)
+
+}}>
        Edit
-      </Button>
+      </Button >
       <Button variant="outlined" onClick={()=>{
 
 removeRecord(params.row.id)

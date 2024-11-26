@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -7,7 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from '@mui/material';
 
-export default function EmployeeForm({open,handleClose,addf}) {
+export default function EmployeeForm({open,handleClose,addf,id,p}) {
 
     const [data,setData] = useState({
         firstName : "",
@@ -17,6 +17,23 @@ export default function EmployeeForm({open,handleClose,addf}) {
     const handleChange = (e)=>{
         setData({...data,[e.target.name]: e.target.value});
     }
+
+    useEffect(()=>{
+
+      if(id>0)
+        {
+          let o = p.find((v)=>{
+
+            return v.id == id;
+          })
+          setData({...o})
+        }
+        else
+        {
+          setData({firstName:"",lastName:""})
+        }
+
+    },[id,open])
   return (
     <Dialog
     open={open}
@@ -25,7 +42,7 @@ export default function EmployeeForm({open,handleClose,addf}) {
       component: 'form',
       onSubmit: (event) => {
         event.preventDefault();
-        addf(data);
+        addf(data,id);
         handleClose();
       },
     }}
@@ -42,6 +59,7 @@ export default function EmployeeForm({open,handleClose,addf}) {
         label="firstName"
         type="text"
         fullWidth
+        value={data.firstName}
         variant="standard"
         onChange={handleChange}
       />
@@ -56,6 +74,7 @@ export default function EmployeeForm({open,handleClose,addf}) {
         label="last Name"
         type="text"
         fullWidth
+        value={data.lastName}
         variant="standard"
         onChange={handleChange}
       />
