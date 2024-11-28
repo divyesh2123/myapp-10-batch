@@ -8,12 +8,15 @@ import FallbackRender from './fallbackRender.jsx'
 import MyInput from './MyInput.jsx'
 import DisplayDataM from './DisplayDataM.jsx'
 import ParentNew from '../ParentNew.jsx'
+import MyForm from './MyForm.jsx'
+import MyParent from './MyParent.jsx'
 
 const MarkdownPreview = React.lazy(() => import('./CounterWithClass.jsx'));
 const Login = React.lazy(() => import('./Login.jsx'));
 
+import App from './App.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ParentNew/> 
+    <App/> 
   </React.StrictMode>,
 )

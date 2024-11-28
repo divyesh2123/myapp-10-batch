@@ -7,25 +7,57 @@ import {
     DialogTitle, 
     TextField } 
 from '@mui/material';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function FormPopUp(prpos) 
-{
+{ 
+
+
   const [form,setform]= useState({
     firstName:"",
     lastName : ""
   })
+
+  useEffect(()=>{
+
+    if(prpos.id>=0)
+    {
+      let obj = [...prpos.data].find((v)=>{
+
+        return v.id == prpos.id;
+      });
+
+      setform({...obj});
+    }
+
+  },[prpos.id])
 
   const handleChange = (e)=>{
     setform({...form,[e.target.name]:e.target.value})
   }
 
   const saveInformatiopn = ()=>{
+    if(prpos.id>=0)
+    {
+      //edit
 
+      let objData = prpos.data.find((v)=>{
+
+        return v.id == prpos.id;
+      });
+
+      objData.firstName = form.firstName;
+      objData.lastName= form.lastName;
+      prpos.setData([...prpos.data]);
+      prpos.handleClose();
+    }
+    else
+    {
     let p = [...prpos.data];
     p.push({...form,id:p.length+1});
     prpos.setData(p);
     prpos.handleClose();
+    }
   }
 
   return (
@@ -59,6 +91,7 @@ export default function FormPopUp(prpos)
         type="text"
         fullWidth
         variant="standard"
+        value={form.firstName}
         onChange={handleChange}
       />
       <TextField
@@ -71,6 +104,7 @@ export default function FormPopUp(prpos)
         type="text"
         fullWidth
         variant="standard"
+        value={form.lastName}
         onChange={handleChange}
       />
     </DialogContent>

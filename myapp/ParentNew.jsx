@@ -7,11 +7,17 @@ export default function ParentNew() {
 
     const [open,setopen]= useState(false);
     const [data,setData]= useState([]);
+    const [id,setId]= useState(-1);
 
     console.log(data);
 
     const handleClose= ()=>{
         setopen(false);
+    }
+
+    const editItem = (id)=>{
+      setId(id);
+      setopen(true);
     }
   return (
     <>
@@ -27,10 +33,13 @@ export default function ParentNew() {
          handleClose={handleClose} 
          data ={data}
          setData={setData}
+          id={id}
+          setId={setId}
          >
 
          </FormPopUp>
-        <GridDataDisplay data={data} setData={setData}/>
+        <GridDataDisplay data={data} setData={setData} 
+         editItem={editItem}/>
     
     
     

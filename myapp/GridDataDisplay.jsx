@@ -50,7 +50,10 @@ export default function GridDataDisplay(props)
            size="small"
            style={{ marginLeft: 16 }}
            tabIndex={params.hasFocus ? 0 : -1}
-          
+            onClick={()=>{
+              props.editItem(params.row.id);
+            
+            }}
           >Edit</Button>
         
         </>)
