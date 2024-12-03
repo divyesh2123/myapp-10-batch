@@ -15,8 +15,12 @@ const MarkdownPreview = React.lazy(() => import('./CounterWithClass.jsx'));
 const Login = React.lazy(() => import('./Login.jsx'));
 
 import App from './App.jsx';
+import MyDataD from './MyDataD.jsx'
+import Co from './Co.jsx'
+import NormalForm from './NormalForm.jsx'
+import TestNew from './TestNew.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App/> 
+    <TestNew/> 
   </React.StrictMode>,
 )
